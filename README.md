@@ -4,9 +4,9 @@ Repositorio con el código base para completar el reto de Flutter in the Dark 20
 
 Objetivo: Crear una interación lo mas parecida a la siguiente:
 
-<img height="300" alt="" src="https://github.com/flutterconf/intermedio-ui-2020/blob/master/challenge.gif?raw=true"> 
+<img height="300" src="https://github.com/flutterconf/intermedio-ui-2020/blob/main/challenge.gif?raw=true"/> 
 
-Para más calidad puedes descargarte el [vídeo](https://github.com/flutterconf/intermedio-ui-2020/blob/master/challenge.mov?raw=true)
+Para más calidad puedes descargarte el [vídeo](https://github.com/flutterconf/intermedio-ui-2020/blob/main/challenge.mov?raw=true)
 
 ## Pasos a seguir para completar el reto
 1. Hacer fork de este repositorio.
