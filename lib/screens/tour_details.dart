@@ -1,6 +1,7 @@
 import 'package:animation_challenge/data/tour.dart';
 import 'package:animation_challenge/utils/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class TourDetailsPage extends StatelessWidget {
   TourDetailsPage(this.tour);
@@ -9,7 +10,13 @@ class TourDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _TourDetailSinglePage(tour: tour);
+    return Swiper(
+      index: Tour.defaultList.indexOf(tour),
+      itemCount: Tour.defaultList.length,
+      itemBuilder: (BuildContext context, int index) {
+        return _TourDetailSinglePage(tour: Tour.defaultList[index]);
+      },
+    );
   }
 }
 
