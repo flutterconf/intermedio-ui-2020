@@ -76,6 +76,70 @@ class _TourDetailSinglePage extends StatelessWidget {
                         fontFamily: "CustomIcons",
                         fontSize: 20,
                         fontWeight: FontWeight.w200),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Text(
+                    "Nearest Hotels",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "CustomIcons",
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        letterSpacing: -0.3),
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 58,
+                        height: 58,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage(tour.imageUrl),
+                            ),
+                            color: grayColor,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          clipBehavior: Clip.hardEdge,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: SizedBox(
+                          width: 58,
+                          height: 58,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage(tour.imageUrl),
+                              ),
+                              color: grayColor,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            clipBehavior: Clip.hardEdge,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 58,
+                        height: 58,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage(tour.imageUrl),
+                            ),
+                            color: grayColor,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          clipBehavior: Clip.hardEdge,
+                        ),
+                      ),
+                    ],
                   )
                 ],
               ),
