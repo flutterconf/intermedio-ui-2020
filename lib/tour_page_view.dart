@@ -1,3 +1,4 @@
+import 'package:animation_challenge/screens/tour_details.dart';
 import 'package:animation_challenge/utils/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,34 +29,44 @@ class _TourContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(tour.imageUrl), fit: BoxFit.cover),
-          borderRadius: BorderRadius.circular(20)),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              tour.title,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "CustomIcons",
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
-            ),
-            Text(
-              tour.subtitle,
-              style: TextStyle(
-                  color: whiteColor,
-                  fontFamily: "CustomIcons",
-                  fontSize: 15,
-                  fontWeight: FontWeight.w200),
-            )
-          ],
+    void onTap() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => TourDetailsPage()),
+      );
+    }
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(tour.imageUrl), fit: BoxFit.cover),
+            borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                tour.title,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "CustomIcons",
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+              Text(
+                tour.subtitle,
+                style: TextStyle(
+                    color: whiteColor,
+                    fontFamily: "CustomIcons",
+                    fontSize: 15,
+                    fontWeight: FontWeight.w200),
+              )
+            ],
+          ),
         ),
       ),
     );
