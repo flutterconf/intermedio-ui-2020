@@ -32,7 +32,7 @@ class _TourContainer extends StatelessWidget {
     void onTap() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => TourDetailsPage()),
+        MaterialPageRoute(builder: (context) => TourDetailsPage(tour)),
       );
     }
 
