@@ -1,3 +1,4 @@
+import 'package:animation_challenge/utils/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -24,7 +25,7 @@ class _TourContainer extends StatelessWidget {
   _TourContainer(this.tour);
 
   final Tour tour;
-  // AssetImage(Tour.defaultList[index].imageUrl)
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,6 +33,31 @@ class _TourContainer extends StatelessWidget {
           image: DecorationImage(
               image: AssetImage(tour.imageUrl), fit: BoxFit.cover),
           borderRadius: BorderRadius.circular(20)),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              tour.title,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "CustomIcons",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+            ),
+            Text(
+              tour.subtitle,
+              style: TextStyle(
+                  color: whiteColor,
+                  fontFamily: "CustomIcons",
+                  fontSize: 15,
+                  fontWeight: FontWeight.w200),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
