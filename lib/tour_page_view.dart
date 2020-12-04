@@ -4,60 +4,37 @@ import 'package:flutter/material.dart';
 
 import 'data/tour.dart';
 
-class TourCarrousel extends StatelessWidget {
+class TourCarrousel extends StatefulWidget {
+  @override
+  _TourCarrouselState createState() => _TourCarrouselState();
+}
+
+class _TourCarrouselState extends State<TourCarrousel> {
+  final _controller = CarouselController();
+
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final titleStyle = theme.textTheme.headline6.copyWith(color: Colors.white);
-    final subtitleStyle = theme.textTheme.caption.copyWith(color: Colors.white);
-
     return CarouselSlider(
-      options: CarouselOptions(height: 400.0),
-      items: Tour.defaultList.map((i) {
+      carouselController: _controller,
+      options: CarouselOptions(
+        height: 400.0,
+      ),
+      items: Tour.defaultList.map((tour) {
         return Builder(
           builder: (BuildContext context) {
             return InkWell(
-              child: Hero(
-                tag: i.id,
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                      image: AssetImage(
-                        i.imageUrl,
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          i.title,
-                          style: titleStyle,
-                        ),
-                        Text(
-                          i.subtitle,
-                          style: subtitleStyle,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () {
-                Navigator.push(
+              child: TourHero(tour: tour),
+              onTap: () async {
+                Tour selectedTour = await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => FullScreenTour(selectedItem: i),
+                    builder: (_) => FullScreenTour(selectedTour: tour),
                     fullscreenDialog: true,
                   ),
                 );
+                final pageIndex =
+                    Tour.defaultList.indexWhere((t) => t.id == selectedTour.id);
+                _controller.jumpToPage(pageIndex);
               },
             );
           },
@@ -68,18 +45,15 @@ class TourCarrousel extends StatelessWidget {
 }
 
 class FullScreenTour extends StatelessWidget {
-  final Tour selectedItem;
+  final Tour selectedTour;
 
-  const FullScreenTour({Key key, this.selectedItem}) : super(key: key);
+  const FullScreenTour({Key key, this.selectedTour}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final theme = Theme.of(context);
-    final titleStyle = theme.textTheme.headline6.copyWith(color: Colors.white);
-    final subtitleStyle = theme.textTheme.caption.copyWith(color: Colors.white);
-
-    final initialPage = Tour.defaultList.indexOf(selectedItem);
+    final initialPage =
+        Tour.defaultList.indexWhere((tour) => tour.id == selectedTour.id);
 
     return Scaffold(
       body: CarouselSlider(
@@ -89,51 +63,75 @@ class FullScreenTour extends StatelessWidget {
           enlargeCenterPage: false,
           initialPage: initialPage,
         ),
-        items: Tour.defaultList.map((i) {
+        items: Tour.defaultList.map((tour) {
           return Builder(
             builder: (BuildContext context) {
               return Stack(
                 children: [
-                  Hero(
-                    tag: i.id,
-                    child: Container(
-                      width: size.width,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                            i.imageUrl,
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              i.title,
-                              style: titleStyle,
-                            ),
-                            Text(
-                              i.subtitle,
-                              style: subtitleStyle,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  TourHero(
+                    tour: tour,
+                    fullScreen: true,
                   ),
                   BackButton(
                     color: Colors.white,
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => Navigator.of(context).pop(tour),
                   ),
                 ],
               );
             },
           );
         }).toList(),
+      ),
+    );
+  }
+}
+
+class TourHero extends StatelessWidget {
+  final Tour tour;
+  final bool fullScreen;
+
+  const TourHero({Key key, this.tour, this.fullScreen = false})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final titleStyle = theme.textTheme.headline6.copyWith(color: Colors.white);
+    final subtitleStyle = theme.textTheme.caption.copyWith(color: Colors.white);
+    return Hero(
+      tag: tour.id,
+      key: Key(tour.id),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.symmetric(
+          horizontal: fullScreen ? 0 : 5.0,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(fullScreen ? 0 : 10),
+          image: DecorationImage(
+            image: AssetImage(
+              tour.imageUrl,
+            ),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                tour.title,
+                style: titleStyle,
+              ),
+              Text(
+                tour.subtitle,
+                style: subtitleStyle,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
