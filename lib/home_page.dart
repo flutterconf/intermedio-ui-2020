@@ -1,4 +1,3 @@
-
 import 'package:animation_challenge/tour_page_view.dart';
 import 'package:animation_challenge/utils/tab_bar_icons.dart';
 import 'package:animation_challenge/utils/theme.dart';
@@ -6,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'utils/stars_widget.dart';
-
 
 /// Pagina principal
 /// No hace falta editarla
@@ -16,29 +14,27 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          // AppBar 
+          // AppBar
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(20),
               child: Row(
                 children: [
                   Expanded(
-                    child: Text(
-                      'Welcome Simon',
-                      style: Theme.of(context).textTheme.headline5
-                    ),
+                    child: Text('Welcome Simon',
+                        style: Theme.of(context).textTheme.headline5),
                   ),
                   CircleAvatar(backgroundColor: Colors.grey[300]),
                 ],
               ),
             ),
           ),
-          // Carrusel de Tours 
+          // Carrusel de Tours
           SliverToBoxAdapter(
             child: Container(
-                height: 200,
-                child: TourCarrousel(),
-              ),
+              height: 200,
+              child: TourCarrousel(),
+            ),
           ),
           SliverToBoxAdapter(
             child: Padding(
@@ -93,10 +89,21 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: SizedBox(child: Icon(TabBarIcons.stars, size: 32,), height: 24,), label: "Hotels"),
-          BottomNavigationBarItem(icon: Icon(TabBarIcons.compass), label: "Tours"),
-          BottomNavigationBarItem(icon: Icon(TabBarIcons.heart), label: "Saved"),
-          BottomNavigationBarItem(icon: Icon(TabBarIcons.profile), label: "Profile"),
+          BottomNavigationBarItem(
+              icon: SizedBox(
+                child: Icon(
+                  TabBarIcons.stars,
+                  size: 32,
+                ),
+                height: 24,
+              ),
+              label: "Hotels"),
+          BottomNavigationBarItem(
+              icon: Icon(TabBarIcons.compass), label: "Tours"),
+          BottomNavigationBarItem(
+              icon: Icon(TabBarIcons.heart), label: "Saved"),
+          BottomNavigationBarItem(
+              icon: Icon(TabBarIcons.profile), label: "Profile"),
         ],
       ),
     );
@@ -179,4 +186,3 @@ class TourTile extends StatelessWidget {
     );
   }
 }
-

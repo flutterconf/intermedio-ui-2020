@@ -11,7 +11,6 @@ final whiteColor = Color(0xFFD8D8D8);
 final grayColor = Color(0xFFA0A0A0);
 
 ThemeData defaultTheme = ThemeData(
-  
   textTheme: textTheme.copyWith(
     headline6: TextStyle(
       fontWeight: FontWeight.w600,
@@ -68,9 +67,9 @@ class TourPageRoute<T> extends MaterialPageRoute<T> {
   @override
   Duration get transitionDuration => Duration(seconds: 1);
 
+  // TODO: implement reverseTransitionDuration
   @override
-    // TODO: implement reverseTransitionDuration
-    Duration get reverseTransitionDuration => Duration(milliseconds: 800);
+  Duration get reverseTransitionDuration => Duration(milliseconds: 800);
 }
 
 /// Transición que evita la transición propia de las rutas cupertino en la
